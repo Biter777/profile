@@ -26,14 +26,14 @@ func TestProfile(t *testing.T) {
 		code   string
 		checks []checkFn
 	}{{
-		name: "default profile (cpu)",
+		name: "profile cpu",
 		code: `
 package main
 
-import "github.com/pkg/profile"
+import "github.com/biter777/profile"
 
 func main() {
-	defer profile.Start().Stop()
+	defer profile.Start(profile.CPUProfile).Stop()
 }	
 `,
 		checks: []checkFn{
@@ -46,7 +46,7 @@ func main() {
 		code: `
 package main
 
-import "github.com/pkg/profile"
+import "github.com/biter777/profile"
 
 func main() {
 	defer profile.Start(profile.MemProfile).Stop()
@@ -62,7 +62,7 @@ func main() {
 		code: `
 package main
 
-import "github.com/pkg/profile"
+import "github.com/biter777/profile"
 
 func main() {
 	defer profile.Start(profile.MemProfileRate(2048)).Stop()
@@ -78,7 +78,7 @@ func main() {
 		code: `
 package main
 
-import "github.com/pkg/profile"
+import "github.com/biter777/profile"
 
 func main() {
 	profile.Start()
@@ -87,7 +87,7 @@ func main() {
 `,
 		checks: []checkFn{
 			NoStdout,
-			Stderr("cpu profiling enabled", "profile: Start() already called"),
+			Stderr("cpu profiling enabled", "Start() already called"),
 			Err,
 		},
 	}, {
@@ -95,7 +95,7 @@ func main() {
 		code: `
 package main
 
-import "github.com/pkg/profile"
+import "github.com/biter777/profile"
 
 func main() {
 	defer profile.Start(profile.BlockProfile).Stop()
@@ -111,7 +111,7 @@ func main() {
 		code: `
 package main
 
-import "github.com/pkg/profile"
+import "github.com/biter777/profile"
 
 func main() {
 	defer profile.Start(profile.MutexProfile).Stop()
@@ -127,7 +127,7 @@ func main() {
 		code: `
 package main
 
-import "github.com/pkg/profile"
+import "github.com/biter777/profile"
 
 func main() {
 	defer profile.Start(profile.ProfilePath(".")).Stop()
@@ -143,7 +143,7 @@ func main() {
 		code: `
 package main
 
-import "github.com/pkg/profile"
+import "github.com/biter777/profile"
 
 func main() {
 		defer profile.Start(profile.ProfilePath("` + f.Name() + `")).Stop()
@@ -159,7 +159,7 @@ func main() {
 		code: `
 package main
 
-import "github.com/pkg/profile"
+import "github.com/biter777/profile"
 
 func main() {
 	profile.Start(profile.CPUProfile).Stop()
@@ -183,22 +183,11 @@ func main() {
 				"profile: mutex profiling disabled"),
 			NoErr,
 		},
-	}, {
-		name: "profile quiet",
-		code: `
-package main
-
-import "github.com/pkg/profile"
-
-func main() {
-        defer profile.Start(profile.Quiet).Stop()
-}       
-`,
-		checks: []checkFn{NoStdout, NoStderr, NoErr},
 	}}
 	for _, tt := range profileTests {
 		t.Log(tt.name)
 		stdout, stderr, err := runTest(t, tt.code)
+		//fmt.Println(tt.code)
 		for _, f := range tt.checks {
 			f(t, stdout, stderr, err)
 		}
@@ -244,14 +233,12 @@ func NoErr(t *testing.T, _, _ []byte, err error) {
 }
 
 // validatedOutput validates the given slice of lines against data from the given reader.
-func validateOutput(r io.Reader, want []string) bool {
+func validateOutput(r io.Reader, want []string) (present bool) {
 	s := bufio.NewScanner(r)
 	for _, line := range want {
-		if !s.Scan() || !strings.Contains(s.Text(), line) {
-			return false
-		}
+		present = present || (s.Scan() && strings.Contains(s.Text(), line))
 	}
-	return true
+	return present
 }
 
 var validateOutputTests = []struct {
