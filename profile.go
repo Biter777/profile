@@ -119,10 +119,8 @@ func ProfilePath(path string) func(*Profile) {
 
 // ProfilePathLocalDir setup the base path where various profiling
 // files are written to: .../LocalDir/profile12345. (12345 - auto generated)
-func ProfilePathLocalDir() func(*Profile) {
-	return func(p *Profile) {
-		p.path, _ = ioutil.TempDir(localDir(), "profile")
-	}
+func ProfilePathLocalDir(p *Profile) {
+	p.path, _ = ioutil.TempDir(localDir(), "profile")
 }
 
 // Stop stops the profile and flushes any unwritten data.

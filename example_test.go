@@ -4,7 +4,7 @@ import (
 	"flag"
 	"os"
 
-	"github.com/pkg/profile"
+	"github.com/biter777/profile"
 )
 
 func ExampleStart() {

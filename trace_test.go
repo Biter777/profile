@@ -1,6 +1,6 @@
 package profile_test
 
-import "github.com/pkg/profile"
+import "github.com/biter777/profile"
 
 func ExampleTraceProfile() {
 	// use execution tracing, rather than the default cpu profiling.
