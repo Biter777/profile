@@ -14,7 +14,8 @@ installation
 usage
 -----
 
-Enabling profiling in your application is as simple as one line at the top of your main function.
+Enabling profiling in your application is as simple as one line at the top of your main function. 
+
 By default CPU, Memory, Mutex, Block profiling and Trace out is enabled.
 
 ```go
@@ -30,6 +31,7 @@ options
 -------
 
 What to profile is controlled by config value passed to profile.Start. 
+
 By default CPU, Memory, Mutex, Block profiling and Trace out is enabled.
 
 ```go
