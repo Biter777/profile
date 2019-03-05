@@ -1,5 +1,4 @@
-// Package profile provides a simple way to manage runtime/pprof
-// profiling of your Go application, multi profiling supported.
+// Package profile helps to easy manage runtime/pprof profiling of your Go application, multi profiling supported.
 package profile
 
 import (
