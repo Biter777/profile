@@ -14,7 +14,8 @@ installation
 usage
 -----
 
-Enabling profiling in your application is as simple as one line at the top of your main function
+Enabling profiling in your application is as simple as one line at the top of your main function.
+By default CPU, Memory, Mutex, Block profiling and Trace out is enabled.
 
 ```go
 import "github.com/biter777/profile"
@@ -29,7 +30,7 @@ options
 -------
 
 What to profile is controlled by config value passed to profile.Start. 
-By default CPU profiling is enabled.
+By default CPU, Memory, Mutex, Block profiling and Trace out is enabled.
 
 ```go
 import "github.com/biter777/profile"
@@ -37,7 +38,7 @@ import "github.com/biter777/profile"
 func main() {
     // p.Stop() must be called before the program exits to
     // ensure profiling information is written to disk.
-    p := profile.Start(profile.MemProfile, profile.ProfilePath("."), profile.NoShutdownHook)
+    p := profile.Start(profile.CPUProfile, profile.MemProfile, profile.ProfilePath("."), profile.NoShutdownHook)
     ...
 }
 ```
