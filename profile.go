@@ -1,8 +1,5 @@
 // Package profile provides a simple way to manage runtime/pprof
-// profiling of your Go application.
-// Multi profiling supported.
-// (c) by Dave Cheney <dave@cheney.net>, modified by biter <biter2004@yandex.ru>
-// ( Original package is: "github.com/pkg/profile", thnx to Dave Cheney, he is really cool )
+// profiling of your Go application. Multi profiling supported.
 package profile
 
 import (
