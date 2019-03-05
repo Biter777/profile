@@ -150,8 +150,8 @@ func Start(options ...func(*Profile)) interface {
 	for _, option := range options {
 		option(&prof)
 	}
-	if len(options) < 1 {
-		ProfileAll(&prof)
+	if !prof.cpuMode && !prof.memMode && !prof.mutexMode && !prof.blockMode && !prof.traceMode {
+		ProfileAll(&prof) // Default
 	}
 
 	path, err := func() (string, error) {
