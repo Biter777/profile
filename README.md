@@ -1,15 +1,15 @@
 profile
 =======
 
-Simple profiling support package for Go
+Simple profiling support package for Go with multi profiling support
 
-[![Build Status](https://travis-ci.org/pkg/profile.svg?branch=master)](https://travis-ci.org/pkg/profile) [![GoDoc](http://godoc.org/github.com/pkg/profile?status.svg)](http://godoc.org/github.com/pkg/profile)
+[![Build Status](https://travis-ci.org/pkg/profile.svg?branch=master)](https://travis-ci.org/pkg/profile) [![GoDoc](http://godoc.org/github.com/biter777/profile?status.svg)](http://godoc.org/github.com/biter777/profile)
 
 
 installation
 ------------
 
-    go get github.com/pkg/profile
+    go get github.com/biter777/profile
 
 usage
 -----
@@ -17,7 +17,7 @@ usage
 Enabling profiling in your application is as simple as one line at the top of your main function
 
 ```go
-import "github.com/pkg/profile"
+import "github.com/biter777/profile"
 
 func main() {
     defer profile.Start().Stop()
@@ -32,7 +32,7 @@ What to profile is controlled by config value passed to profile.Start.
 By default CPU profiling is enabled.
 
 ```go
-import "github.com/pkg/profile"
+import "github.com/biter777/profile"
 
 func main() {
     // p.Stop() must be called before the program exits to
@@ -44,7 +44,7 @@ func main() {
 
 Several convenience package level values are provided for cpu, memory, and block (contention) profiling.
 
-For more complex options, consult the [documentation](http://godoc.org/github.com/pkg/profile).
+For more complex options, consult the [documentation](http://godoc.org/github.com/biter777/profile).
 
 contributing
 ------------
