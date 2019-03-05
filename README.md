@@ -52,6 +52,9 @@ For more complex options, consult the [documentation](http://godoc.org/github.co
 contributing
 ------------
 
+(c) by Dave Cheney <dave@cheney.net>, modified by biter <biter2004@yandex.ru>
+Original package is: "github.com/pkg/profile", thnx to Dave Cheney, he is really cool.
+
 We welcome pull requests, bug fixes and issue reports.
 
 Before proposing a change, please discuss it first by raising an issue.
